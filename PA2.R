@@ -24,3 +24,6 @@ if(!file.exists(datafile)){
 
 stormdata <- read.csv(datafile, header = TRUE)
 
+## STEP 2: clean data
+stormdata.clean <- stormdata %>% select(STATE, EVTYPE, FATAlities, INJURIES, PROPDMGEXP, CROPDMG, CROPDMGEXP)
+
