@@ -29,17 +29,17 @@ This report centers around the U.S. National Oceanic and Atmospheric Administrat
 
 ### 1. Session reproducability
 
-```
+```{r echo=TRUE}
 sessionInfo()
 ```
 
-```
+```{r echo=TRUE}
 rm(list=ls(all=TRUE))
 ```
 
 ### 2. Required packages
 
-```
+```{r echo=TRUE}
 library(dplyr, quietly = T, warn.conflicts = F)
 library(ggplot2, quietly = T, warn.conflicts = F)
 ```
@@ -47,7 +47,7 @@ library(ggplot2, quietly = T, warn.conflicts = F)
 #### Download
 The NOAA database file is made available in a compressed bzip2 file, containing a master CSV file. The CSV contains all relevant data.
 
-```
+```{r echo=TRUE}
 # Get required files
 datafile <- "storm.csv.bz2"
 if(!file.exists(datafile)){
@@ -61,7 +61,7 @@ if(!file.exists(datafile)){
 }
 ```
 #### Reading the data
-```
+```{r echo=TRUE}
 stormdata <- read.csv(datafile, header = TRUE)
 ```
 
@@ -69,7 +69,7 @@ stormdata <- read.csv(datafile, header = TRUE)
 
 Subset the data to calculate given relevant column information.
 
-```
+```{r echo=TRUE}
 stormdata.clean <- stormdata[,c('EVTYPE','FATALITIES','INJURIES', 'PROPDMG', 'PROPDMGEXP', 'CROPDMG', 'CROPDMGEXP', 'STATE')]
 ```
 
@@ -84,7 +84,7 @@ The events in the database start in the year 1950 and end in November 2011. In t
 
 #### Scale Cleaned Data
 
-```
+```{r echo=TRUE}
 #scale data appropriately
 # Convert H, K, M, B units to calculate Property Damage
 stormdata.clean$PROPDMGNUM = 0
@@ -104,7 +104,7 @@ stormdata.clean[stormdata.clean$CROPDMGEXP == "B", ]$CROPDMGNUM = stormdata.clea
 
 Double-check our work, making sure to capture relevant events.
 
-```
+```{r echo=TRUE}
 event.type<-stormdata.clean %>% 
 	group_by(EVTYPE) %>%
 	summarize(n=n()) %>% 
@@ -114,7 +114,7 @@ event.type
 
 As we can see, there are multiple events that have ambiguous names but could easily be included in our dataset. To rectify, conglomerate into intuitive names.
 
-```
+```{r echo=TRUE}
 stormdata.clean$EVTYPE <- gsub("^(HEAT).*", "HEAT", stormdata.clean$EVTYPE)
 stormdata.clean$EVTYPE <- gsub("^(RECORD HEAT).*", "HEAT", stormdata.clean$EVTYPE)
 stormdata.clean$EVTYPE <- gsub("^(EXTREME HEAT).*", "HEAT", stormdata.clean$EVTYPE)
@@ -156,7 +156,7 @@ stormdata.clean$EVTYPE <- gsub("^(SURF).*", "SURF", stormdata.clean$EVTYPE)
 ### Across the United States, which types of events (as indicated in the ```EVTYPE``` variable) are most harmful with respect to population health?
 
 
-```
+```{r echo=TRUE}
 fatalities <- aggregate(FATALITIES ~ EVTYPE, data=stormdata.clean, sum)
 fatalities <- fatalities[order(-fatalities$FATALITIES), ][1:10, ]
 fatalities$EVTYPE <- factor(fatalities$EVTYPE, levels = fatalities$EVTYPE)
@@ -167,7 +167,7 @@ ggplot(fatalities, aes(x = EVTYPE, y = FATALITIES)) +
     xlab("Event Type") + ylab("Fatalities") + ggtitle("Number of fatalities by top 10 Weather Events")
 ```
 
-```
+```{r echo=TRUE}
 injuries <- aggregate(INJURIES ~ EVTYPE, data=stormdata.clean, sum)
 injuries <- injuries[order(-injuries$INJURIES), ][1:10, ]
 injuries$EVTYPE <- factor(injuries$EVTYPE, levels = injuries$EVTYPE)
@@ -179,7 +179,7 @@ ggplot(injuries, aes(x = EVTYPE, y = INJURIES)) +
 ```
 
 ### Across the United States, which types of events have the greatest economic consequences?
-```
+```{r echo=TRUE}
 damages <- aggregate(PROPDMGNUM + CROPDMGNUM ~ EVTYPE, data=stormdata.clean, sum)
 names(damages) = c("EVTYPE", "TOTALDAMAGE")
 damages <- damages[order(-damages$TOTALDAMAGE), ][1:10, ]
