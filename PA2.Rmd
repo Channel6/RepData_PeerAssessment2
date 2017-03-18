@@ -108,6 +108,18 @@ stormdata.clean[stormdata.clean$CROPDMGEXP == "M", ]$CROPDMGNUM = stormdata.clea
 stormdata.clean[stormdata.clean$CROPDMGEXP == "B", ]$CROPDMGNUM = stormdata.clean[stormdata.clean$CROPDMGEXP == "B", ]$CROPDMG * 10^9
 ```
 
+#### Exploring event types
+
+Double-check our work, making sure to capture relevant events.
+
+```
+event.type<-stormdata.clean %>% 
+	group_by(EVTYPE) %>%
+	summarize(n=n()) %>% 
+	arrange(desc(n))
+event.type
+```
+
 
 
 ## Results
