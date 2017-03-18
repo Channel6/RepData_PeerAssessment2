@@ -97,4 +97,15 @@ ggplot(fatalities, aes(x = EVTYPE, y = FATALITIES)) +
     theme(axis.text.x = element_text(angle = 90, hjust = 1)) + 
     xlab("Event Type") + ylab("Fatalities") + ggtitle("Number of fatalities by top 10 Weather Events")
 
+injuries <- aggregate(INJURIES ~ EVTYPE, data=tidyNOAA, sum)
+injuries <- injuries[order(-injuries$INJURIES), ][1:10, ]
+injuries$EVTYPE <- factor(injuries$EVTYPE, levels = injuries$EVTYPE)
+
+ggplot(injuries, aes(x = EVTYPE, y = INJURIES)) + 
+    geom_bar(stat = "identity", fill = "blue") + 
+    theme(axis.text.x = element_text(angle = 90, hjust = 1)) + 
+    xlab("Event Type") + ylab("Injuries") + ggtitle("Number of injuries by top 10 Weather Events")
+
+
+#which types of events have the greatest economic consequences?
 
