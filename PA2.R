@@ -1,15 +1,16 @@
-####	       	Replicating Data -- Peer Assessment 1	          	####
-##			                   Glenn Kerbein			                    ##
-##              			     March 4, 2017		    	                ##
+####	       	Replicating Data -- Peer Assessment 1		 ###
+##			     Glenn Kerbein			  ##
+##			     March 4, 2017			  ##
 ####################################################################
 
 ## STEP 0: init environment
 #clean the working environment
 rm(list=ls(all=TRUE)) 
 
+## STEP 1: get required packages
 
 
-## STEP 1: init data for reading
+## STEP 2: init data for reading
 # Get required files
 datafile <- "storm.csv.bz2"
 if(!file.exists(datafile)){
@@ -24,6 +25,6 @@ if(!file.exists(datafile)){
 
 stormdata <- read.csv(datafile, header = TRUE)
 
-## STEP 2: clean data
+## STEP 3: clean data
 stormdata.clean <- stormdata %>% select(STATE, EVTYPE, FATAlities, INJURIES, PROPDMGEXP, CROPDMG, CROPDMGEXP)
 

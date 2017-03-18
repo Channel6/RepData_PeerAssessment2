@@ -1,5 +1,5 @@
 ---
-title: "Reproduceible Research Project 2"
+title: "Exploring NOAA databases: the health and economic effects of severe weather in the United States"
 author: "Glenn Kerbein"
 date: "March 14, 2017"
 output: html_document
@@ -9,22 +9,39 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## R Markdown
+## Synopsis
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+Storms and other severe weather events can cause both public health and economic problems for communities and municipalities.
 
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+This report centers around the U.S. National Oceanic and Atmospheric Administration's (NOAA) storm database. This database tracks characteristics of major storms and weather events in the United States, including when and where they occur, as well as estimates of any fatalities, injuries, and property damage.
 
-```{r cars}
-summary(cars)
+### The data analysis must address the following:
+
+1. Across the United States, which types of events (as indicated in the ```EVTYPE``` variable) are most harmful with respect to population health?
+2. Across the United States, which types of events have the greatest economic consequences?
+
+### By aggregating the data by storm event type, this analysis shows:
+
+* Tornados are the most harmfull events on population health (including injury and fatalities).
+* Floods are responsible for the most economic damage.
+
+## Data Processing
+
+### 1. Session reproducability
+
+```
+sessionInfo()
 ```
 
-## Including Plots
-
-You can also embed plots, for example:
-
-```{r pressure, echo=FALSE}
-plot(pressure)
+```
+rm(list=ls(all=TRUE))
 ```
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+### 2. Required packages
+
+
+
+
+## Results
+
+
