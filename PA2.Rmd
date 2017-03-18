@@ -39,6 +39,48 @@ rm(list=ls(all=TRUE))
 
 ### 2. Required packages
 
+```
+library(dplyr, quietly = T, warn.conflicts = F)
+library(car, quietly = T, warn.conflicts = F)
+library(ggplot2, quietly = T, warn.conflicts = F)
+library(xtable, quietly = T, warn.conflicts = F)
+options(xtable.comment = FALSE)
+library(tidyr, quietly = T, warn.conflicts = F)
+```
+
+### 3. Load required variables
+
+```
+colorpalette <- c("#999999", "#E69F00", "#D55E00", "#0072B2", "#F0E442", "#009E73", "#000000", "#CC79A7","#56B4E9")
+```
+
+### 4. Data
+
+#### Download
+The NOAA database file is made available in a compressed bzip2 file, containing a master CSV file. The CSV contains all relevant data.
+
+```
+# Get required files
+datafile <- "storm.csv.bz2"
+if(!file.exists(datafile)){
+  url <- "https://d396qusza40orc.cloudfront.net/repdata%2Fdata%2FStormData.csv.bz2"
+  download.file(
+    url,
+    destfile = datafile,
+    method = "curl",
+    quiet = TRUE
+  )
+}
+stormdata <- read.csv(datafile, header = TRUE)
+```
+#### Upstream documentation for the data
+Some database documentation has been made available:
+
+* [National Weather Service Storm Data Documentation](https://d396qusza40orc.cloudfront.net/repdata%2Fpeer2_doc%2Fpd01016005curr.pdf)
+* [National Climatic Data Center Storm Events FAQ](https://d396qusza40orc.cloudfront.net/repdata%2Fpeer2_doc%2FNCDC%20Storm%20Events-FAQ%20Page.pdf])
+
+The events in the database start in the year 1950 and end in November 2011. In the earlier years of the database there are generally fewer events recorded, most likely due to a lack of good records. More recent years should be considered more complete.
+
 
 
 
