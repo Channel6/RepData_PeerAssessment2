@@ -91,7 +91,7 @@ fatalities <- fatalities[order(-fatalities$FATALITIES), ][1:10, ]
 fatalities$EVTYPE <- factor(fatalities$EVTYPE, levels = fatalities$EVTYPE)
 
 ggplot(fatalities, aes(x = EVTYPE, y = FATALITIES)) + 
-    geom_bar(stat = "identity", fill = "blue") + 
+    geom_bar(stat = "identity", fill = "red") + 
     theme(axis.text.x = element_text(angle = 90, hjust = 1)) + 
     xlab("Event Type") + ylab("Fatalities") + ggtitle("Number of fatalities by top 10 Weather Events")
 
@@ -100,10 +100,20 @@ injuries <- injuries[order(-injuries$INJURIES), ][1:10, ]
 injuries$EVTYPE <- factor(injuries$EVTYPE, levels = injuries$EVTYPE)
 
 ggplot(injuries, aes(x = EVTYPE, y = INJURIES)) + 
-    geom_bar(stat = "identity", fill = "blue") + 
+    geom_bar(stat = "identity", fill = "yellow") + 
     theme(axis.text.x = element_text(angle = 90, hjust = 1)) + 
     xlab("Event Type") + ylab("Injuries") + ggtitle("Number of injuries by top 10 Weather Events")
 
 
 #which types of events have the greatest economic consequences?
+damages <- aggregate(PROPDMGNUM + CROPDMGNUM ~ EVTYPE, data=stormdata.clean, sum)
+names(damages) = c("EVTYPE", "TOTALDAMAGE")
+damages <- damages[order(-damages$TOTALDAMAGE), ][1:10, ]
+damages$EVTYPE <- factor(damages$EVTYPE, levels = damages$EVTYPE)
+
+ggplot(damages, aes(x = EVTYPE, y = TOTALDAMAGE)) + 
+    geom_bar(stat = "identity", fill = "green") + 
+    theme(axis.text.x = element_text(angle = 90, hjust = 1)) + 
+    xlab("Event Type") + ylab("Damages ($)") + ggtitle("Property & Crop Damages by top 10 Weather Events")
+
 
