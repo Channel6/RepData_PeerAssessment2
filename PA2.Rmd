@@ -120,6 +120,45 @@ event.type<-stormdata.clean %>%
 event.type
 ```
 
+As we can see, there are multiple events that have ambiguous names but could easily be included in our dataset. To rectify, conglomerate into intuitive names.
+
+```
+stormdata.clean$EVTYPE <- gsub("^(HEAT).*", "HEAT", stormdata.clean$EVTYPE)
+stormdata.clean$EVTYPE <- gsub("^(RECORD HEAT).*", "HEAT", stormdata.clean$EVTYPE)
+stormdata.clean$EVTYPE <- gsub("^(EXTREME HEAT).*", "HEAT", stormdata.clean$EVTYPE)
+stormdata.clean$EVTYPE <- gsub("^(Heat).*", "HEAT", stormdata.clean$EVTYPE)
+stormdata.clean$EVTYPE <- gsub("^(EXCESSIVE HEAT).*", "HEAT", stormdata.clean$EVTYPE)
+stormdata.clean$EVTYPE <- gsub("^(TSTM).*", "THUNDER STORM", stormdata.clean$EVTYPE)
+stormdata.clean$EVTYPE <- gsub("^(THUNDERSTORM).*", "THUNDER STORM", stormdata.clean$EVTYPE)
+stormdata.clean$EVTYPE <- gsub("^(TROPICAL STORM).*", "TROPICAL STORM", stormdata.clean$EVTYPE)
+stormdata.clean$EVTYPE <- gsub("^(FLASH FLOOD).*", "FLOOD", stormdata.clean$EVTYPE)
+stormdata.clean$EVTYPE <- gsub("^(WIND).*", "WIND", stormdata.clean$EVTYPE)
+stormdata.clean$EVTYPE <- gsub("^(STRONG WIND).*", "WIND", stormdata.clean$EVTYPE)
+stormdata.clean$EVTYPE <- gsub("^(HIGH WIND).*", "WIND", stormdata.clean$EVTYPE)
+stormdata.clean$EVTYPE <- gsub("^(HURRICANE).*", "HURICCANE", stormdata.clean$EVTYPE)
+stormdata.clean$EVTYPE <- gsub("^(SNOW).*", "SNOW", stormdata.clean$EVTYPE)
+stormdata.clean$EVTYPE <- gsub("^(HEAVY SNOW).*", "SNOW", stormdata.clean$EVTYPE)
+stormdata.clean$EVTYPE <- gsub("^(FIRE).*", "FIRE", stormdata.clean$EVTYPE)
+stormdata.clean$EVTYPE <- gsub("^(WILD/FOREST FIRE).*", "FIRE", stormdata.clean$EVTYPE)
+stormdata.clean$EVTYPE <- gsub("^(WILDFIRE).*", "FIRE", stormdata.clean$EVTYPE)
+stormdata.clean$EVTYPE <- gsub("^(WILD FIRES).*", "FIRE", stormdata.clean$EVTYPE)
+stormdata.clean$EVTYPE <- gsub("^(HAIL).*", "HAIL", stormdata.clean$EVTYPE)
+stormdata.clean$EVTYPE <- gsub("^(BLIZZARD).*", "BLIZZARD", stormdata.clean$EVTYPE)
+stormdata.clean$EVTYPE <- gsub("^(COLD).*", "COLD", stormdata.clean$EVTYPE)
+stormdata.clean$EVTYPE <- gsub("^(WINTER WEATHER).*", "COLD", stormdata.clean$EVTYPE)
+stormdata.clean$EVTYPE <- gsub("^(EXTREME COLD).*", "COLD", stormdata.clean$EVTYPE)
+stormdata.clean$EVTYPE <- gsub("^(RIP).*", "RIP", stormdata.clean$EVTYPE)
+stormdata.clean$EVTYPE <- gsub("^(FOG).*", "FOG", stormdata.clean$EVTYPE)
+stormdata.clean$EVTYPE <- gsub("^(DENSE FOG).*", "FOG", stormdata.clean$EVTYPE)
+stormdata.clean$EVTYPE <- gsub("^(AVALANCHE).*", "AVALANCHE", stormdata.clean$EVTYPE)
+stormdata.clean$EVTYPE <- gsub("^(AVALANCE).*", "AVALANCHE", stormdata.clean$EVTYPE)
+stormdata.clean$EVTYPE <- gsub("^(RAIN).*", "RAIN", stormdata.clean$EVTYPE)
+stormdata.clean$EVTYPE <- gsub("^(HEAVY RAIN).*", "RAIN", stormdata.clean$EVTYPE)
+stormdata.clean$EVTYPE <- gsub("^(HIGH SURF).*", "SURF", stormdata.clean$EVTYPE)
+stormdata.clean$EVTYPE <- gsub("^(HEAVY SURF).*", "SURF", stormdata.clean$EVTYPE)
+stormdata.clean$EVTYPE <- gsub("^(SURF).*", "SURF", stormdata.clean$EVTYPE)
+```
+
 
 
 ## Results
