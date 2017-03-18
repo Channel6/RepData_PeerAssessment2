@@ -74,19 +74,40 @@ stormdata <- read.csv(datafile, header = TRUE)
 ```
 
 #### Clean the data
+
+Subset the data to calculate given relevant column information.
+
 ```
-stormdata.clean <- stormdata %>% select(STATE, EVTYPE, FATAlities, INJURIES, PROPDMGEXP, CROPDMG, CROPDMGEXP)
+stormdata.clean <- stormdata[,c('EVTYPE','FATALITIES','INJURIES', 'PROPDMG', 'PROPDMGEXP', 'CROPDMG', 'CROPDMGEXP', 'STATE')]
 ```
 
-
-
-#### Upstream documentation for the data
+#### Upstream Documentation
 Some database documentation has been made available:
 
 * [National Weather Service Storm Data Documentation](https://d396qusza40orc.cloudfront.net/repdata%2Fpeer2_doc%2Fpd01016005curr.pdf)
 * [National Climatic Data Center Storm Events FAQ](https://d396qusza40orc.cloudfront.net/repdata%2Fpeer2_doc%2FNCDC%20Storm%20Events-FAQ%20Page.pdf])
 
 The events in the database start in the year 1950 and end in November 2011. In the earlier years of the database there are generally fewer events recorded, most likely due to a lack of good records. More recent years should be considered more complete.
+
+
+#### Scale Cleaned Data
+
+```
+#scale data appropriately
+# Convert H, K, M, B units to calculate Property Damage 
+stormdata.clean$PROPDMGNUM = 0
+stormdata.clean[stormdata.clean$PROPDMGEXP == "H", ]$PROPDMGNUM = stormdata.clean[stormdata.clean$PROPDMGEXP == "H", ]$PROPDMG * 10^2
+stormdata.clean[stormdata.clean$PROPDMGEXP == "K", ]$PROPDMGNUM = stormdata.clean[stormdata.clean$PROPDMGEXP == "K", ]$PROPDMG * 10^3
+stormdata.clean[stormdata.clean$PROPDMGEXP == "M", ]$PROPDMGNUM = stormdata.clean[stormdata.clean$PROPDMGEXP == "M", ]$PROPDMG * 10^6
+stormdata.clean[stormdata.clean$PROPDMGEXP == "B", ]$PROPDMGNUM = stormdata.clean[stormdata.clean$PROPDMGEXP == "B", ]$PROPDMG * 10^9
+# Convert H, K, M, B units to calculate Crop Damage
+stormdata.clean$CROPDMGNUM = 0
+stormdata.clean[stormdata.clean$CROPDMGEXP == "H", ]$CROPDMGNUM = stormdata.clean[stormdata.clean$CROPDMGEXP == "H", ]$CROPDMG * 10^2
+stormdata.clean[stormdata.clean$CROPDMGEXP == "K", ]$CROPDMGNUM = stormdata.clean[stormdata.clean$CROPDMGEXP == "K", ]$CROPDMG * 10^3
+stormdata.clean[stormdata.clean$CROPDMGEXP == "M", ]$CROPDMGNUM = stormdata.clean[stormdata.clean$CROPDMGEXP == "M", ]$CROPDMG * 10^6
+stormdata.clean[stormdata.clean$CROPDMGEXP == "B", ]$CROPDMGNUM = stormdata.clean[stormdata.clean$CROPDMGEXP == "B", ]$CROPDMG * 10^9
+```
+
 
 
 ## Results
