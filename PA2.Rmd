@@ -157,7 +157,7 @@ stormdata.clean$EVTYPE <- gsub("^(SURF).*", "SURF", stormdata.clean$EVTYPE)
 
 
 ```
-fatalities <- aggregate(FATALITIES ~ EVTYPE, data=tidyNOAA, sum)
+fatalities <- aggregate(FATALITIES ~ EVTYPE, data=stormdata.clean, sum)
 fatalities <- fatalities[order(-fatalities$FATALITIES), ][1:10, ]
 fatalities$EVTYPE <- factor(fatalities$EVTYPE, levels = fatalities$EVTYPE)
 
@@ -168,7 +168,7 @@ ggplot(fatalities, aes(x = EVTYPE, y = FATALITIES)) +
 ```
 
 ```
-injuries <- aggregate(INJURIES ~ EVTYPE, data=tidyNOAA, sum)
+injuries <- aggregate(INJURIES ~ EVTYPE, data=stormdata.clean, sum)
 injuries <- injuries[order(-injuries$INJURIES), ][1:10, ]
 injuries$EVTYPE <- factor(injuries$EVTYPE, levels = injuries$EVTYPE)
 

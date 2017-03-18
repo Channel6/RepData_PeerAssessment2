@@ -95,7 +95,7 @@ ggplot(fatalities, aes(x = EVTYPE, y = FATALITIES)) +
     theme(axis.text.x = element_text(angle = 90, hjust = 1)) + 
     xlab("Event Type") + ylab("Fatalities") + ggtitle("Number of fatalities by top 10 Weather Events")
 
-injuries <- aggregate(INJURIES ~ EVTYPE, data=tidyNOAA, sum)
+injuries <- aggregate(INJURIES ~ EVTYPE, data=stormdata.clean, sum)
 injuries <- injuries[order(-injuries$INJURIES), ][1:10, ]
 injuries$EVTYPE <- factor(injuries$EVTYPE, levels = injuries$EVTYPE)
 
