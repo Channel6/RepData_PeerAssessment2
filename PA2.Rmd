@@ -94,7 +94,7 @@ The events in the database start in the year 1950 and end in November 2011. In t
 
 ```
 #scale data appropriately
-# Convert H, K, M, B units to calculate Property Damage 
+# Convert H, K, M, B units to calculate Property Damage
 stormdata.clean$PROPDMGNUM = 0
 stormdata.clean[stormdata.clean$PROPDMGEXP == "H", ]$PROPDMGNUM = stormdata.clean[stormdata.clean$PROPDMGEXP == "H", ]$PROPDMG * 10^2
 stormdata.clean[stormdata.clean$PROPDMGEXP == "K", ]$PROPDMGNUM = stormdata.clean[stormdata.clean$PROPDMGEXP == "K", ]$PROPDMG * 10^3
@@ -158,8 +158,6 @@ stormdata.clean$EVTYPE <- gsub("^(HIGH SURF).*", "SURF", stormdata.clean$EVTYPE)
 stormdata.clean$EVTYPE <- gsub("^(HEAVY SURF).*", "SURF", stormdata.clean$EVTYPE)
 stormdata.clean$EVTYPE <- gsub("^(SURF).*", "SURF", stormdata.clean$EVTYPE)
 ```
-
-
 
 ## Results
 
