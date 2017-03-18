@@ -86,3 +86,15 @@ stormdata.clean$EVTYPE <- gsub("^(HIGH SURF).*", "SURF", stormdata.clean$EVTYPE)
 stormdata.clean$EVTYPE <- gsub("^(HEAVY SURF).*", "SURF", stormdata.clean$EVTYPE)
 stormdata.clean$EVTYPE <- gsub("^(SURF).*", "SURF", stormdata.clean$EVTYPE)
 
+## Results
+# plot number of fatalities with the most harmful event type
+fatalities <- aggregate(FATALITIES ~ EVTYPE, data=stormdata.clean, sum)
+fatalities <- fatalities[order(-fatalities$FATALITIES), ][1:10, ]
+fatalities$EVTYPE <- factor(fatalities$EVTYPE, levels = fatalities$EVTYPE)
+
+ggplot(fatalities, aes(x = EVTYPE, y = FATALITIES)) + 
+    geom_bar(stat = "identity", fill = "blue") + 
+    theme(axis.text.x = element_text(angle = 90, hjust = 1)) + 
+    xlab("Event Type") + ylab("Fatalities") + ggtitle("Number of fatalities by top 10 Weather Events")
+
+
