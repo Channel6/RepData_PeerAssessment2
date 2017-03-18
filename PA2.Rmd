@@ -41,11 +41,7 @@ rm(list=ls(all=TRUE))
 
 ```
 library(dplyr, quietly = T, warn.conflicts = F)
-library(car, quietly = T, warn.conflicts = F)
 library(ggplot2, quietly = T, warn.conflicts = F)
-library(xtable, quietly = T, warn.conflicts = F)
-options(xtable.comment = FALSE)
-library(tidyr, quietly = T, warn.conflicts = F)
 ```
 
 ### 3. Load required variables
