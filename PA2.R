@@ -44,4 +44,45 @@ stormdata.clean[stormdata.clean$CROPDMGEXP == "H", ]$CROPDMGNUM = stormdata.clea
 stormdata.clean[stormdata.clean$CROPDMGEXP == "K", ]$CROPDMGNUM = stormdata.clean[stormdata.clean$CROPDMGEXP == "K", ]$CROPDMG * 10^3
 stormdata.clean[stormdata.clean$CROPDMGEXP == "M", ]$CROPDMGNUM = stormdata.clean[stormdata.clean$CROPDMGEXP == "M", ]$CROPDMG * 10^6
 stormdata.clean[stormdata.clean$CROPDMGEXP == "B", ]$CROPDMGNUM = stormdata.clean[stormdata.clean$CROPDMGEXP == "B", ]$CROPDMG * 10^9
+# Get EVTYPEs
+event.type<-stormdata.clean %>% 
+	group_by(EVTYPE) %>%
+	summarize(n=n()) %>% 
+	arrange(desc(n))
+event.type
+# rename events
+stormdata.clean$Event <- gsub("^(HEAT).*", "HEAT", stormdata.clean$EVTYPE)
+noaa.storm.clean$Event <- gsub("^(RECORD HEAT).*", "HEAT", noaa.storm.clean$Event)
+noaa.storm.clean$Event <- gsub("^(EXTREME HEAT).*", "HEAT", noaa.storm.clean$Event)
+noaa.storm.clean$Event <- gsub("^(Heat).*", "HEAT", noaa.storm.clean$Event)
+noaa.storm.clean$Event <- gsub("^(EXCESSIVE HEAT).*", "HEAT", noaa.storm.clean$Event)
+noaa.storm.clean$Event <- gsub("^(TSTM).*", "THUNDER STORM", noaa.storm.clean$Event)
+noaa.storm.clean$Event <- gsub("^(THUNDERSTORM).*", "THUNDER STORM", noaa.storm.clean$Event)
+noaa.storm.clean$Event <- gsub("^(TROPICAL STORM).*", "TROPICAL STORM", noaa.storm.clean$Event)
+noaa.storm.clean$Event <- gsub("^(FLASH FLOOD).*", "FLOOD", noaa.storm.clean$Event)
+noaa.storm.clean$Event <- gsub("^(WIND).*", "WIND", noaa.storm.clean$Event)
+noaa.storm.clean$Event <- gsub("^(STRONG WIND).*", "WIND", noaa.storm.clean$Event)
+noaa.storm.clean$Event <- gsub("^(HIGH WIND).*", "WIND", noaa.storm.clean$Event)
+noaa.storm.clean$Event <- gsub("^(HURRICANE).*", "HURICCANE", noaa.storm.clean$Event)
+noaa.storm.clean$Event <- gsub("^(SNOW).*", "SNOW", noaa.storm.clean$Event)
+noaa.storm.clean$Event <- gsub("^(HEAVY SNOW).*", "SNOW", noaa.storm.clean$Event)
+noaa.storm.clean$Event <- gsub("^(FIRE).*", "FIRE", noaa.storm.clean$Event)
+noaa.storm.clean$Event <- gsub("^(WILD/FOREST FIRE).*", "FIRE", noaa.storm.clean$Event)
+noaa.storm.clean$Event <- gsub("^(WILDFIRE).*", "FIRE", noaa.storm.clean$Event)
+noaa.storm.clean$Event <- gsub("^(WILD FIRES).*", "FIRE", noaa.storm.clean$Event)
+noaa.storm.clean$Event <- gsub("^(HAIL).*", "HAIL", noaa.storm.clean$Event)
+noaa.storm.clean$Event <- gsub("^(BLIZZARD).*", "BLIZZARD", noaa.storm.clean$Event)
+noaa.storm.clean$Event <- gsub("^(COLD).*", "COLD", noaa.storm.clean$Event)
+noaa.storm.clean$Event <- gsub("^(WINTER WEATHER).*", "COLD", noaa.storm.clean$Event)
+noaa.storm.clean$Event <- gsub("^(EXTREME COLD).*", "COLD", noaa.storm.clean$Event)
+noaa.storm.clean$Event <- gsub("^(RIP).*", "RIP", noaa.storm.clean$Event)
+noaa.storm.clean$Event <- gsub("^(FOG).*", "FOG", noaa.storm.clean$Event)
+noaa.storm.clean$Event <- gsub("^(DENSE FOG).*", "FOG", noaa.storm.clean$Event)
+noaa.storm.clean$Event <- gsub("^(AVALANCHE).*", "AVALANCHE", noaa.storm.clean$Event)
+noaa.storm.clean$Event <- gsub("^(AVALANCE).*", "AVALANCHE", noaa.storm.clean$Event)
+noaa.storm.clean$Event <- gsub("^(RAIN).*", "RAIN", noaa.storm.clean$Event)
+noaa.storm.clean$Event <- gsub("^(HEAVY RAIN).*", "RAIN", noaa.storm.clean$Event)
+noaa.storm.clean$Event <- gsub("^(HIGH SURF).*", "SURF", noaa.storm.clean$Event)
+noaa.storm.clean$Event <- gsub("^(HEAVY SURF).*", "SURF", noaa.storm.clean$Event)
+noaa.storm.clean$Event <- gsub("^(SURF).*", "SURF", noaa.storm.clean$Event)
 
