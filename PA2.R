@@ -29,5 +29,19 @@ if(!file.exists(datafile)){
 stormdata <- read.csv(datafile, header = TRUE)
 
 ## STEP 3: clean data
-stormdata.clean <- stormdata %>% select(STATE, EVTYPE, FATAlities, INJURIES, PROPDMGEXP, CROPDMG, CROPDMGEXP)
+#subset data
+stormdata.clean <- stormdata[,c('EVTYPE','FATALITIES','INJURIES', 'PROPDMG', 'PROPDMGEXP', 'CROPDMG', 'CROPDMGEXP', 'STATE')]
+#scale data appropriately
+# Convert H, K, M, B units to calculate Property Damage 
+stormdata.clean$PROPDMGNUM = 0
+stormdata.clean[stormdata.clean$PROPDMGEXP == "H", ]$PROPDMGNUM = stormdata.clean[stormdata.clean$PROPDMGEXP == "H", ]$PROPDMG * 10^2
+stormdata.clean[stormdata.clean$PROPDMGEXP == "K", ]$PROPDMGNUM = stormdata.clean[stormdata.clean$PROPDMGEXP == "K", ]$PROPDMG * 10^3
+stormdata.clean[stormdata.clean$PROPDMGEXP == "M", ]$PROPDMGNUM = stormdata.clean[stormdata.clean$PROPDMGEXP == "M", ]$PROPDMG * 10^6
+stormdata.clean[stormdata.clean$PROPDMGEXP == "B", ]$PROPDMGNUM = stormdata.clean[stormdata.clean$PROPDMGEXP == "B", ]$PROPDMG * 10^9
+# Convert H, K, M, B units to calculate Crop Damage
+stormdata.clean$CROPDMGNUM = 0
+stormdata.clean[stormdata.clean$CROPDMGEXP == "H", ]$CROPDMGNUM = stormdata.clean[stormdata.clean$CROPDMGEXP == "H", ]$CROPDMG * 10^2
+stormdata.clean[stormdata.clean$CROPDMGEXP == "K", ]$CROPDMGNUM = stormdata.clean[stormdata.clean$CROPDMGEXP == "K", ]$CROPDMG * 10^3
+stormdata.clean[stormdata.clean$CROPDMGEXP == "M", ]$CROPDMGNUM = stormdata.clean[stormdata.clean$CROPDMGEXP == "M", ]$CROPDMG * 10^6
+stormdata.clean[stormdata.clean$CROPDMGEXP == "B", ]$CROPDMGNUM = stormdata.clean[stormdata.clean$CROPDMGEXP == "B", ]$CROPDMG * 10^9
 
