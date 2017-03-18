@@ -44,14 +44,6 @@ library(dplyr, quietly = T, warn.conflicts = F)
 library(ggplot2, quietly = T, warn.conflicts = F)
 ```
 
-### 3. Load required variables
-
-```
-colorpalette <- c("#999999", "#E69F00", "#D55E00", "#0072B2", "#F0E442", "#009E73", "#000000", "#CC79A7","#56B4E9")
-```
-
-### 4. Data
-
 #### Download
 The NOAA database file is made available in a compressed bzip2 file, containing a master CSV file. The CSV contains all relevant data.
 

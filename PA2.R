@@ -10,8 +10,6 @@ rm(list=ls(all=TRUE))
 ## STEP 1: get required packages
 library(dplyr, quietly = T, warn.conflicts = F)
 library(ggplot2, quietly = T, warn.conflicts = F)
-# required variables
-colorpalette <- c("#999999", "#E69F00", "#D55E00", "#0072B2", "#F0E442", "#009E73", "#000000", "#CC79A7","#56B4E9")
 
 ## STEP 2: init data for reading
 # Get required files
